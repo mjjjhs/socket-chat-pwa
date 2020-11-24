@@ -26,7 +26,9 @@ Socket.io를 이용한 채팅 ROOM 생성
 알림을 클릭시 브라우저의 탭일 경우 탭에 포커스 앱 화면으로 실행했을 경우 앱에 포커스 되도록 서비스워커 이벤트 리스너 등록
 
 # 구동 화면
-![socket-chat-pwa](https://user-images.githubusercontent.com/4207593/100057663-44779c80-2e6b-11eb-9605-045e8077b565.png)   
+![socket-chat-pwa](https://user-images.githubusercontent.com/4207593/100058318-658cbd00-2e6c-11eb-86fd-30426892fdac.png)   
 ![socket-chat-pwa](https://user-images.githubusercontent.com/4207593/100057712-578a6c80-2e6b-11eb-8d24-3856af733f55.png)   
 ![socket-chat-pwa](https://user-images.githubusercontent.com/4207593/100057720-5b1df380-2e6b-11eb-9896-e86b127494ea.png)   
-![socket-chat-pwa](https://user-images.githubusercontent.com/4207593/100057688-4ccfd780-2e6b-11eb-8d87-8523ecff035b.png)   
+![socket-chat-pwa](https://user-images.githubusercontent.com/4207593/100058408-8f45e400-2e6c-11eb-979a-f6a540e7cd9c.png)
+<img src="https://user-images.githubusercontent.com/4207593/100058408-8f45e400-2e6c-11eb-979a-f6a540e7cd9c.png" width="600" title="socket-chat-pwa" alt="socket-chat-pwa"></img>
+

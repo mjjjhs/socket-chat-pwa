@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lexend Exa', sans-serif;
+  background: url('./images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: wheat;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 50px 0px 20px 0px;
+  text-align: center;
+  padding: 2rem;
+  background: black;
+  font-size: 40px;
+}
+header p {
+  font-size: 25px;
+  color: black;
+}
+
+section {
+  width: 100%;
+  padding: 20px;
+}
+.chat-wrap {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  background: #fff;
+}
+.chat-wrap strong {
+  color: white;
+  background: black;
+}
+.chat-wrap span {
+  margin-left: 20px;
+  color: black;
+}
+.chat-wrap > ul {
+  overflow:auto;
+  height: 100%;
+  width: 100%;
+  list-style:none;
+  padding: 0 20px;
+}
+.chat-wrap li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.room-wrap {
+  position: absolute;
+  max-width: 120px;
+  top: 50px;
+  left: 20px;
+}
+.room-wrap > p {
+  color: black;
+  text-align: center;
+  font-size: 12px;
+  line-height:20px;
+}
+.room-wrap button {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  background: white;
+  line-height: 30px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.room-wrap button:last-child {
+  margin-bottom: 0;
+}
+.room-wrap button.joined {
+  background: black;
+  color: white;
+}
+.room-wrap button.joined span {
+  display: none;
+}
+.joined-text {
+  color: grey;
+  line-height: 30px;
+  font-size: 12px;
+  text-align: center;
+}
+.your-message {
+  text-align: left;
+  margin-bottom: 30px !important;
+}
+.datetime {
+  font-size:11px;
+}
+.me-message {
+  text-align: right;
+  margin-bottom: 30px !important;
+}
+.me-message:last-child,
+.your-message:last-child {
+  margin-bottom: 0;
+}
+.me-message span,
+.your-message span{
+  padding: 20px;
+  border: solid 1px #fcdf03;
+  border-radius: 10px;
+}
+.me-message .datetime,
+.your-message .datetime{
+  margin-top: 30px;
+  color: #bbb;
+}
+input#send {
+  height: 30px;
+  width: 100%;
+  line-height: 30px;
+  font-size:12px;
+  padding: 0 10px;
+}
+@media (max-width: 480px){
+  header h1{
+    font-size: 35px;
+  }
+  header p{
+    font-size: 16px;
+  }
+}

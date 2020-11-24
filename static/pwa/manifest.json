@@ -1,0 +1,16 @@
+{
+  "name": "lqt-cs",
+  "short_name": "LQT-CS",
+  "description": "Socket PWA Client",
+  "theme_color": "#d36060",
+  "background_color": "#f08e8e",
+  "display": "standalone",
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "images/icons/lqtfe_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+     <title>Document</title>
+     <link rel="stylesheet" href="/styles.css">
+     <link rel="stylesheet" href="https://unpkg.com/vue-simple-notify/dist/vue-simple-notify.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script src="https://unpkg.com/vue-simple-notify/dist/vue-simple-notify.min.js"></script>
+     <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div id="v-app" class="main">
+        <section class="alerts">
+            <alerts-component :items="alerts "></alerts-component>
+        </section>
+        <section class="chat">
+            <h1>chat </h1>
+            <form>
+                <input v-model='text' type="text">
+                <button type="submit" @click.prevent="sendChatMessage()">Send</button>
+            </form>
+            <div class="tab-row">
+                <button class="tab-btn" :class="{ active: activeRoom === 'general'}" @click="activeRoom = 'general'">General</button>
+                <button class="tab-btn" :class="{ active: activeRoom === 'lqtFront'}" @click="activeRoom = 'lqtFront'">lqtFront</button>
+                <button class="tab-btn" :class="{ active: activeRoom === 'lqtOA'}" @click="activeRoom = 'lqtOA'">lqtOA</button>
+                <button class="tab-btn" :class="{ active: activeRoom === 'lqtB2B'}" @click="activeRoom = 'lqtB2B'">lqtB2B</button>
+            </div>
+            <div class="tab-row">
+                Status : {{isMemberOfActiveRoom ? 'Joined' : 'NOT Joined'}} <button @click="toggleRoomMembership()">{{isMemberOfActiveRoom ? 'Leave' : 'Join'}}</button>
+            </div>
+            <div>
+                <ul>
+                    <li v-for="msg of messages[activeRoom]">
+                        <strong>{{msg.sender}} : </strong> {{msg.messages}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+    <script>
+        Vue.component('alerts-component', VueSimpleNotify.VueSimpleNotify);
+        const app = new Vue({
+            el: '#v-app',
+            data:  {
+                username : '',
+                text : '',
+                messages: {
+                    general: [],
+                    lqtFront : [],
+                    lqtOA : [],
+                    lqtB2B : []
+                },
+                rooms : {
+                    general: false,
+                    lqtFront : false,
+                    lqtOA : false,
+                    lqtB2B : false
+                },
+                socket : { chat : null, alerts : null},
+                alerts : [],
+                activeRoom : 'general'
+            },
+            methods : {
+                sendChatMessage() {
+                    if(this.isMemberOfActiveRoom){
+                        this.socket.chat.emit('chatToServer', {sender: this.username, messages: this.text, room : this.activeRoom});
+                        this.text = '';
+                    } else {
+                        alert('active room 을 선택하세요');
+                    }
+                },
+                receiveChatMessage(msg){
+                    this.messages[msg.room].push(msg);
+                },
+                receiveAlertMessage(msg){
+                    this.alerts.push(msg);
+                },
+                toggleRoomMembership(){
+                    if(this.isMemberOfActiveRoom){
+                        this.socket.chat.emit('leaveRoom', this.activeRoom);
+                    }else {
+                        this.socket.chat.emit('joinRoom', this.activeRoom);
+                    }
+                }
+            },
+            computed : {
+                isMemberOfActiveRoom() {
+                    return this.rooms[this.activeRoom]
+                }
+            },
+            created(){
+                this.username = prompt('Enter your username:');
+
+                this.socket.chat = io('https://lqt-cs.dev.yanolja.in/chat');
+                //this.socket.chat = io('http://localhost:3000/chat');
+                this.socket.chat.on('chatToClient', (msg)=>{
+                    this.receiveChatMessage(msg);
+                });
+
+                this.socket.chat.on('connect', ()=>{
+                    this.toggleRoomMembership();
+                });
+
+                this.socket.chat.on('joinedRoom', (room)=>{
+                    this.rooms[room] = true;
+                });
+
+                this.socket.chat.on('leftRoom', (room)=>{
+                    this.rooms[room] = false;
+                });
+
+                this.socket.alerts = io('https://lqt-cs.dev.yanolja.in/alert')
+                //this.socket.alerts = io('http://localhost:3000/alert')
+                this.socket.alerts.on('alertToClient', (msg)=>{
+                    console.log(msg);
+                    this.receiveAlertMessage(msg);
+                });
+
+            }
+        })
+    </script>
+</body>
+</html>

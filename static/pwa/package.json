@@ -1,0 +1,11 @@
+{
+  "name": "lqt-cs-client",
+  "version": "1.0.0",
+  "description": "lqt-cs-client",
+  "main": "index.js",
+  "author": "jihoon.moon",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^11.3.2"
+  }
+}

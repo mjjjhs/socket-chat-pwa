@@ -93,8 +93,7 @@
             created(){
                 this.username = prompt('Enter your username:');
 
-                this.socket.chat = io('https://lqt-cs.dev.yanolja.in/chat');
-                //this.socket.chat = io('http://localhost:3000/chat');
+                this.socket.chat = io('http://localhost:3000/chat');
                 this.socket.chat.on('chatToClient', (msg)=>{
                     this.receiveChatMessage(msg);
                 });
@@ -111,8 +110,7 @@
                     this.rooms[room] = false;
                 });
 
-                this.socket.alerts = io('https://lqt-cs.dev.yanolja.in/alert')
-                //this.socket.alerts = io('http://localhost:3000/alert')
+                this.socket.alerts = io('http://localhost:3000/alert')
                 this.socket.alerts.on('alertToClient', (msg)=>{
                     console.log(msg);
                     this.receiveAlertMessage(msg);
